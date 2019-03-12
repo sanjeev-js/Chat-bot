@@ -15,10 +15,10 @@ def Pythonerrors():
             name = excep.find('dt').code.get_text().strip()
             description = excep.find('dd').get_text().strip()
             Error = {'errorName':'','description':'','example':'','url':[]}
-            Error['id'] = len(allErrors) + 1
-            Error['errorName']  = name
+            Error['errorName']  = name.lower()
             Error['description'] = description
-            allErrors.append(Error)
+            if(Error not in allErrors):
+                allErrors.append(Error)
     ProgrammingLanguage['python'] = allErrors
     with open('data/errorCache.json','w') as file:
         rawData = json.dumps(ProgrammingLanguage,indent=4, sort_keys=True)
