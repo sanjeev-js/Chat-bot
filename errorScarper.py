@@ -20,7 +20,7 @@ def Pythonerrors():
             if(Error not in allErrors):
                 allErrors.append(Error)
     ProgrammingLanguage['python'] = allErrors
-    with open('data/errorCache.json','w') as file:
+    with open('errorCache.json','w') as file:
         rawData = json.dumps(ProgrammingLanguage,indent=4, sort_keys=True)
         file.write(rawData)
         file.close()
