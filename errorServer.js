@@ -12,7 +12,7 @@ var TodayDate = createDate.getDate() +" "+ month_names[createDate.getMonth()] + 
 app.put('/allerrors/:lang/:err',(req,res)=>{
   errorDict = req.body
   console.log(errorDict)
-  fs.readFile( __dirname + '/data/errorCache.json',(err,data)=>{
+  fs.readFile( __dirname + '/errorCache.json',(err,data)=>{
     if(err){
       return res.json({"errorMsg":"Check your Json file"})
     }else{
@@ -29,7 +29,7 @@ app.put('/allerrors/:lang/:err',(req,res)=>{
         }
       }
       var myJSON = JSON.stringify(allErrors,null,2)
-      fs.writeFile(__dirname + '/data/errorCache.json', myJSON, (err,data)=>{
+      fs.writeFile(__dirname + '/errorCache.json', myJSON, (err,data)=>{
         return res.json(error)
       })
     }
@@ -41,7 +41,7 @@ app.put('/allerrors/:lang/:err',(req,res)=>{
 
 // Here we get all errors in diffrent language
 app.get('/errorDetails',(req,res)=>{
-  fs.readFile( __dirname + '/data/errorCache.json',(err,data)=>{
+  fs.readFile( __dirname + '/errorCache.json',(err,data)=>{
     if(err){
       return res.json({"errorMsg":"Check your Json file"})
     }else{
@@ -67,7 +67,7 @@ app.get('/errorDetails/:lang',(req,res)=>{
 
 app.get('/errorDetails/:lang/:err',(req,res)=>{
   var userName = req.query.username
-  fs.readFile(__dirname + "/data/userdetailsCache.json",(err,data)=>{
+  fs.readFile(__dirname + "/userdetailsCache.json",(err,data)=>{
     if(err){
       return res.json({"errorMsg":"Check your json file"})
     }
@@ -82,10 +82,10 @@ app.get('/errorDetails/:lang/:err',(req,res)=>{
       }
     }
     var myJSON = JSON.stringify(allusers,null,2)
-    fs.writeFile(__dirname + "/data/userdetailsCache.json",myJSON,(err,data)=>{
+    fs.writeFile(__dirname + "/userdetailsCache.json",myJSON,(err,data)=>{
       if(err){return res.json({"errorMsg":"check your json file."})}
     })
-    fs.readFile(__dirname + "/data/errorCache.json", (err, data)=>{
+    fs.readFile(__dirname + "/errorCache.json", (err, data)=>{
       if(err){
         return res.json(err)
       }else{
@@ -97,7 +97,7 @@ app.get('/errorDetails/:lang/:err',(req,res)=>{
           }
         }
       }
-      fs.readFile(__dirname + "/data/userdetailsCache.json",(err,data)=>{
+      fs.readFile(__dirname + "/userdetailsCache.json",(err,data)=>{
         var allusersdict = JSON.parse(data.toString())
         for(var user in allusersdict){
           if(user !== userName){
